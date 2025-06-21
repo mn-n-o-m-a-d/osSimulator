@@ -11,13 +11,13 @@ export default class OS {
 
     stop() {
         this.status = false;
-        this.processTable = []; 
+        this.processTable = [];
         this.runQueue = [];
     };
 
-    addProcess(id, type, pc, processStatus) {
-        this.processTable.push({ id, type, pc, processStatus });
-        if (processStatus === 'ready') this.runQueue.push(id);
+    addProcess(processInstance) {
+        this.processTable.push(processInstance);
+        if (processInstance.status === 'ready') this.runQueue.push(processInstance.id);
     };
 
     listProcesses() {
