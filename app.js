@@ -5,14 +5,9 @@ import { FixProcess, UserDrivenProcess, EndlessProzess } from './process.js';
 var numOfProcesses = 0;
 let speed = 1;
 
+const osToggle = document.getElementById("os-toggle");
+const processListEl = document.getElementById("process-list");
 const os = new OS();
-os.start();
-console.log("OS status:", os.status);
-
-makeProcess("endless");
-makeProcess("fix");
-makeProcess("endless");
-processHandler();
 
 /*
 os.stop();
@@ -22,6 +17,32 @@ console.log("Queue:", os.runQueue);
 */
 
 ///////////////////// Functions
+
+osToggle.addEventListener("change", () => {
+    if (osToggle.checked) {
+        startOS();
+    } else {
+        stopOS();
+    }
+});
+
+function startOS() {
+    numOfProcesses = 0;
+    os.stop();
+    os.start();
+    makeProcess("endless");
+    makeProcess("fix");
+    makeProcess("endless");
+
+    processHandler();
+    interval = setInterval(updateProcessList, 500);
+}
+
+function stopOS() {
+    os.stop();
+    clearInterval(interval);
+    updateProcessList();
+}
 
 function makeProcess(type) {
     numOfProcesses++;
@@ -63,22 +84,22 @@ function processController() {
 function processStatusController() {
     const listOfProcesses = os.listProcesses();
     const queue = os.runQueue;
-    const queueLength = queue.length;
 
-    function next(index) {
-        if (index >= queueLength) return;
+    function next() {
+        if (queue.length === 0) return;
 
         const id = queue.shift();
         const process = listOfProcesses.find(p => p.id === id);
 
         processStatusChanger(process, () => {
             queue.push(id);
-            next(index + 1); // nächster Prozess erst NACH callback
+            next();  
         });
     }
 
-    next(0); // Start bei erstem Prozess
+    next();
 }
+
 
 function processStatusChanger(process, callback) {
     console.log("Process start:", process);
@@ -104,4 +125,16 @@ function processStatusChanger(process, callback) {
 
         }, 3000 * speed);
     }
+}
+
+function updateProcessList() {
+    const processes = os.listProcesses();
+    processListEl.innerHTML = "";
+
+    processes.forEach(p => {
+        const li = document.createElement("li");
+        li.textContent = `Prozess ${p.id}: ${p.status}`;
+        li.className = `status-${p.status.toLowerCase()}`;
+        processListEl.appendChild(li);
+    });
 }

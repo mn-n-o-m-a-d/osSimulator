@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>OS Sim</title>
+    <title>OS Simulator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        .status-ready { color: green; }
+        .status-running { color: orange; }
+        .status-blocked { color: red; }
+    </style>
 </head>
-
 <body>
+    <h1>OS Simulator</h1>
+
+    <label>
+        <input type="checkbox" id="os-toggle">
+        OS Einschalten
+    </label>
+
+    <h2>Prozesse</h2>
+    <ul id="process-list"></ul>
+
     <script type="module" src="./app.js"></script>
 </body>
-
 </html>
