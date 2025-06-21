@@ -1,5 +1,5 @@
 import OS from './os.js';
-import Process, { FixProcess, UserDrivenProcess, EndlessProzess } from './process.js';
+import { FixProcess, UserDrivenProcess, EndlessProzess } from './process.js';
 
 //Fehler werfen, wenn es 0 ist
 var numOfProcesses = 0;
@@ -7,12 +7,9 @@ let speed = 1;
 
 const os = new OS();
 os.start();
-
-// First process
-makeProcess("endless");
-
 console.log("OS status:", os.status);
 
+makeProcess("endless");
 makeProcess("fix");
 makeProcess("endless");
 processHandler();
@@ -66,20 +63,25 @@ function processController() {
 function processStatusController() {
     const listOfProcesses = os.listProcesses();
     const queue = os.runQueue;
+    const queueLength = queue.length;
 
-    console.log("QUEUE:", [...queue]);
+    function next(index) {
+        if (index >= queueLength) return;
 
-    if (queue.length > 1) {
-        const firstId = queue.shift();
-        console.log("QUEUE ID: ", firstId);
-        const process = listOfProcesses.find(p => p.id === firstId);
-        processStatusChanger(process);
-        queue.push(firstId);
+        const id = queue.shift();
+        const process = listOfProcesses.find(p => p.id === id);
+
+        processStatusChanger(process, () => {
+            queue.push(id);
+            next(index + 1); // nächster Prozess erst NACH callback
+        });
     }
+
+    next(0); // Start bei erstem Prozess
 }
 
-function processStatusChanger(process) {
-    console.log("Process start: ", process);
+function processStatusChanger(process, callback) {
+    console.log("Process start:", process);
 
     if (process.status === "ready") {
         process.status = "running";
@@ -93,22 +95,13 @@ function processStatusChanger(process) {
                 process.status = "ready";
                 console.log("Status: blocked → ready");
 
+                process.operating();
+
+                // Nur wenn komplett durch ist → Callback für nächsten Prozess aufrufen
+                callback();
+
             }, 3000 * speed);
 
         }, 3000 * speed);
     }
-
-    process.operating(speed);
 }
-
-/*
-const process2 = new Process(2, 16, "running");
-const process3 = new Process(3, 2, "ready");
-const process4 = new Process(4, 2, "ready");
-*/
-
-/*
-os.addProcess(2, process2.type, process2.programmCounter, process2.status);
-os.addProcess(3, process3.type, process3.programmCounter, process3.status);
-os.addProcess(4, process4.type, process4.programmCounter, process4.status);
-*/

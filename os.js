@@ -17,7 +17,7 @@ export default class OS {
 
     addProcess(processInstance) {
         this.processTable.push(processInstance);
-        if (processInstance.status === 'ready') this.runQueue.push(processInstance.id);
+        if (processInstance.status == "ready") this.runQueue.push(processInstance.id);
     };
 
     listProcesses() {
