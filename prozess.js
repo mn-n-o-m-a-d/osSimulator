@@ -27,10 +27,14 @@ class Process {
                 console.log("Process ready");
                 break;
             case "running":
-                console.log("Process running");
+                setTimeout(() => {
+                    console.log("Process running");
+                }, 5000 * this.type);
                 break;
             case "blocked":
-                console.log("Process blocked");
+                setTimeout(() => {
+                    console.log("Process blocked");
+                }, 2000 * this.type);
                 break;
             default:
                 console.log("Undefined process status! " + this.status);
