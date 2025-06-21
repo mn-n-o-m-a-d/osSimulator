@@ -1,22 +1,30 @@
 export default class OS {
     constructor() {
-        this.status = "stop";
+        this.status = false;
         this.processTable = [];
+        this.runQueue = [];
     };
 
     start() {
-        this.status = "start";
+        this.status = true;
     };
 
     stop() {
-        this.status = "stop";
+        this.status = false;
+        this.processTable = []; 
+        this.runQueue = [];
     };
 
-    addProcess(id, pc, processStatus) {
-        this.processTable.push({ id, pc, processStatus });
+    addProcess(id, type, pc, processStatus) {
+        this.processTable.push({ id, type, pc, processStatus });
+        if (processStatus === 'ready') this.runQueue.push(id);
     };
 
     listProcesses() {
         return this.processTable;
+    }
+
+    listQueue() {
+        return this.runQueue;
     }
 };

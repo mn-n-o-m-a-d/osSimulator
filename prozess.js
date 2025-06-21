@@ -1,23 +1,8 @@
-class Process {
+export default class Process {
 
-    constructor(type, status) {
+    constructor(type, programmCounter, status) {
         this.type = type;
-        this.status = status
-    }
-
-    get type() {
-        return this.type;
-    }
-
-    get status() {
-        return this.status;
-    }
-
-    set type(type) {
-        this.type = type;
-    }
-
-    set status(status) {
+        this.programmCounter = programmCounter;
         this.status = status;
     }
 
