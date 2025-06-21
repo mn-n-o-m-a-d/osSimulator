@@ -12,8 +12,8 @@ export default class OS {
         this.status = "stop";
     };
 
-    addProcess() {
-        this.processTable.push({ id, pc, status });
+    addProcess(id, pc, processStatus) {
+        this.processTable.push({ id, pc, processStatus });
     };
 
     listProcesses() {
