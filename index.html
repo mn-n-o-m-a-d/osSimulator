@@ -1,29 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>OS Simulator</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-        }
-        .status-ready { color: green; }
-        .status-running { color: orange; }
-        .status-blocked { color: red; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+
 <body>
-    <h1>OS Simulator</h1>
+    <div class="top-row d-flex justify-content-center gap-4" style="max-width: 700px; margin: 2rem auto 1rem auto;">
+        <div class="header-card">
+            <h1>OS Simulator</h1>
+            <label class="power-toggle">
+                <input type="checkbox" id="os-toggle" />
+                <span class="toggle-btn" aria-label="Power Toggle"></span>
+                <span class="power-label" id="os-status-label">OFF</span>
+            </label>
+        </div>
 
-    <label>
-        <input type="checkbox" id="os-toggle">
-        OS Einschalten
-    </label>
+        <div class="card p-3 shadow-sm schalttafel" style="max-width: 320px; font-family: Arial, sans-serif;">
+            <h2 class="mb-2" style="font-weight: 600; font-size: 1.25rem;">Schalttafel</h2>
 
-    <h2>Prozesse</h2>
+            <div class="process-controls d-flex gap-3 align-items-center justify-content-center">
+                <button id="add-process-btn" class="btn btn-sm btn-success fw-bold" aria-label="Add Process"
+                    disabled>＋</button>
+                <button id="remove-process-btn" class="btn btn-sm btn-danger fw-bold" aria-label="Remove Process"
+                    disabled>−</button>
+            </div>
+            <div class="speed-controls p-3" style="max-width: 300px;">
+                <div style="font-weight: 500; font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.2;">
+                    <b>Geschwindigkeit</b>
+                </div>
+                <div class="btn-group w-100" role="group" aria-label="Geschwindigkeit einstellen" style="gap: 0;">
+                    <input type="radio" class="btn-check" name="speed-options" id="speed-0.1" autocomplete="off"
+                        value="0.1" />
+                    <label class="btn btn-outline-primary" for="speed-0.1"
+                        style="flex: 1; text-align: center;">0.1x</label>
+
+                    <input type="radio" class="btn-check" name="speed-options" id="speed-0.5" autocomplete="off"
+                        value="0.5" />
+                    <label class="btn btn-outline-primary" for="speed-0.5"
+                        style="flex: 1; text-align: center;">0.5x</label>
+
+                    <input type="radio" class="btn-check" name="speed-options" id="speed-1" autocomplete="off" value="1"
+                        checked />
+                    <label class="btn btn-outline-primary" for="speed-1" style="flex: 1; text-align: center;">1x</label>
+
+                    <input type="radio" class="btn-check" name="speed-options" id="speed-2" autocomplete="off"
+                        value="2" />
+                    <label class="btn btn-outline-primary" for="speed-2" style="flex: 1; text-align: center;">2x</label>
+
+                    <input type="radio" class="btn-check" name="speed-options" id="speed-5" autocomplete="off"
+                        value="5" />
+                    <label class="btn btn-outline-primary" for="speed-5" style="flex: 1; text-align: center;">5x</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Prozesse</h3>
     <ul id="process-list"></ul>
 
     <script type="module" src="./app.js"></script>
 </body>
+
 </html>

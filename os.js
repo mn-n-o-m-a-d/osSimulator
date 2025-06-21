@@ -17,7 +17,12 @@ export default class OS {
 
     addProcess(processInstance) {
         this.processTable.push(processInstance);
-        if (processInstance.status == "ready") this.runQueue.push(processInstance.id);
+        if (processInstance.status == "READY") this.runQueue.push(processInstance.id);
+    };
+
+    removeProcess(id) {
+        this.processTable = this.processTable.filter(p => p.id !== id);
+        this.runQueue = this.runQueue.filter(pid => pid !== id);
     };
 
     listProcesses() {
