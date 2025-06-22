@@ -19,9 +19,12 @@ Dieses Projekt simuliert eine einfache Betriebssystemprozessverwaltung im Browse
 
 ## Bilder
 
-**Aufgabenstellung**
+**Aufgabenstellung:**
+
 [Aufgabe]: /aufgabe.jpg "Aufgabenstellung"
 ![Aufgabe]
-**Unsere Lösung**
+
+**Unsere Lösung:**
+
 [Lösung]: /Lösung.jpg "Unsere Lösung"
 ![Lösung]
