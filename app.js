@@ -139,7 +139,7 @@ function processStatusChanger(process, callback) {
 
                                 process.operating();
                                 callback();
-                            }, 1000 * speed);
+                            }, 1500 * speed);
 
                         } else {
                             setTimeout(waitForContinue, 100);
@@ -155,10 +155,10 @@ function processStatusChanger(process, callback) {
 
                         process.operating();
                         callback();
-                    }, 3000 * speed);
+                    }, 1500 * speed);
                 }
 
-            }, 3000 * speed);
+            }, 1500 * speed);
         }
     }, 1500 * speed);
 }
@@ -245,7 +245,7 @@ function updateProcessList() {
         const statusContainer = document.createElement("div");
         statusContainer.className = "status-container d-flex justify-content-around";
 
-        const states = ["READY", "RUNNING", "BLOCKED"];
+        const states = ["RUNNING", "BLOCKED", "READY"];
 
         states.forEach(state => {
             const span = document.createElement("span");
