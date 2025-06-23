@@ -1,4 +1,5 @@
 # OS-Prozess-Simulation
+von Horváth-Szarka Ábel und Neuhold Manuel
 
 Dieses Projekt simuliert eine einfache Betriebssystemprozessverwaltung im Browser. Es zeigt, wie Prozesse zwischen den Zuständen **READY**, **RUNNING** und **BLOCKED** wechseln, und verwendet eine Run-Queue zur Ablaufsteuerung.
 
@@ -10,7 +11,11 @@ Dieses Projekt simuliert eine einfache Betriebssystemprozessverwaltung im Browse
 - Dynamisches UI-Update für Prozessstatus
 - Konfigurierbare Geschwindigkeit
 
-## Voraussetzungen
+## Online Ausführung
+
+https://mn-n-o-m-a-d.github.io/osSimulator/
+
+## Voraussetzungen für lokale Ausführung
 
 - Ein moderner Webbrowser (z. B. Chrome, Firefox, Edge)
 - Optional: Ein lokaler Webserver (z. B. python3 -m http.server 8080
